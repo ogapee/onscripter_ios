@@ -1,0 +1,6 @@
+usr/bin/smpeg-config
+usr/include
+usr/lib/libsmpeg.a
+usr/lib/libsmpeg.la
+usr/lib/libsmpeg.so
+usr/share/aclocal/smpeg.m4

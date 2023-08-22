@@ -1,0 +1,64 @@
+Source: smpeg
+Section: libs
+Priority: optional
+Maintainer: Joe Drew <drew@debian.org>
+Build-Depends: dpkg (>= 1.7.2), debhelper (>= 3.0.0), libsdl1.2-dev (>= 1.2.2-3.1), libgtk1.2-dev (>= 1.2.1), libglib1.2-dev
+Standards-Version: 3.6.1
+
+Package: libsmpeg0
+Architecture: any
+Section: libs
+Depends: ${shlibs:Depends}
+Conflicts: smpeg, libsmpeg-dev (<= 0.3.5-1), smpeg-gtv (<= 0.3.5-1), smpeg-plaympeg (<= 0.3.5-1), libsmpeg0c2
+Replaces: libsmpeg0c2
+Provides: libsmpeg0c2
+Description: SDL MPEG Player Library - shared libraries
+ SMPEG (SDL MPEG Player Library) is a free MPEG1 video player library with
+ sound support.  Video playback is based on the ubiquitous Berkeley MPEG
+ player, mpeg_play v2.2.  Audio is played through a slightly modified
+ mpegsound library, part of splay v0.8.2. SMPEG supports MPEG audio (MP3),
+ MPEG-1 video, and MPEG system streams.
+ .
+ This package contains the libsmpeg shared library that is required by
+ many MPEG-playing packages, including smpeg-xmms and smpeg-plaympeg.
+
+Package: libsmpeg-dev
+Architecture: any
+Section: libdevel
+Depends: libsmpeg0 (= ${Source-Version}), libsdl1.2-dev (>= 1.2.2-3.3)
+Description: SDL MPEG Player Library - development files
+ SMPEG (SDL MPEG Player Library) is a free MPEG1 video player library with
+ sound support.  Video playback is based on the ubiquitous Berkeley MPEG
+ player, mpeg_play v2.2.  Audio is played through a slightly modified
+ mpegsound library, part of splay v0.8.2. SMPEG supports MPEG audio (MP3),
+ MPEG-1 video, and MPEG system streams.
+ .
+ This package contains the development files (headers and static libraries)
+ for libsmpeg. It is only needed if you want to compile programs that use
+ SMPEG.
+
+Package: smpeg-plaympeg
+Architecture: any
+Section: graphics
+Depends: ${shlibs:Depends}
+Description: SMPEG command line MPEG audio/video player
+ SMPEG (SDL MPEG Player Library) is a free MPEG1 video player library with
+ sound support.  Video playback is based on the ubiquitous Berkeley MPEG
+ player, mpeg_play v2.2.  Audio is played through a slightly modified
+ mpegsound library, part of splay v0.8.2. SMPEG supports MPEG audio (MP3),
+ MPEG-1 video, and MPEG system streams.
+ .
+ This package contains a command line player called plaympeg.
+
+Package: smpeg-gtv
+Architecture: any
+Section: graphics
+Depends: ${shlibs:Depends}
+Description: SMPEG GTK+ MPEG audio/video player
+ SMPEG (SDL MPEG Player Library) is a free MPEG1 video player library with
+ sound support.  Video playback is based on the ubiquitous Berkeley MPEG
+ player, mpeg_play v2.2.  Audio is played through a slightly modified
+ mpegsound library, part of splay v0.8.2. SMPEG supports MPEG audio (MP3),
+ MPEG-1 video, and MPEG system streams.
+ .
+ This package contains a GTK+ player called gtv.

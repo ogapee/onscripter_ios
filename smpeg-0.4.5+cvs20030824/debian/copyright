@@ -1,0 +1,14 @@
+This is Debian GNU/Linux's prepackaged version of SMPEG, put together by
+Stefan Gybas <sgybas@debian.org>.
+
+The sources were downloaded from SMPEG's home site at
+http://www.lokigames.com/development/smpeg.php3.
+
+Copyright:
+
+SMPEG is offered under the GNU Library Public License (LGPL), the plaympeg
+command line player and the gtk GUI player are licensed under the GNU General
+Public License (GPL).
+
+The full text of the GPL and LGPL may be found on Debian systems in the
+files /usr/share/common-licenses/GPL and /usr/share/common-licenses/LGPL.

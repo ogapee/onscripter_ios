@@ -1,0 +1,91 @@
+#!/usr/bin/make -f
+# debian/rules file for smpeg (uses debhelper V2)
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+# This is the debhelper compatability version to use.
+export DH_COMPAT=2
+
+# Handle DEB_BUILD_OPTIONS
+CFLAGS = -g
+INSTALL_PROGRAM = /usr/bin/install -c
+
+ifneq (,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
+CFLAGS += -O0
+else
+CFLAGS += -O2
+endif
+ifeq (,$(findstring nostrip,$(DEB_BUILD_OPTIONS)))
+INSTALL_PROGRAM += -s
+endif
+
+DEB_HOST_ARCH       ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
+
+CXX = g++
+
+build: build-stamp
+build-stamp:
+	dh_testdir
+
+	# Work around aclocal.m4 getting patched before others
+	# which matters on slow buildds
+	touch aclocal.m4
+	touch Makefile.in
+	touch audio/Makefile.in
+	touch video/Makefile.in
+	touch config.h.in
+	touch stamp-h.in
+	touch configure
+
+	CFLAGS="$(CFLAGS)" CXX=$(CXX) ./configure --prefix=/usr --enable-mmx=no --enable-opengl-player=no
+
+	$(MAKE)
+	touch build-stamp
+
+clean:
+	dh_testdir
+	dh_testroot
+	rm -f build-stamp install-stamp
+	-$(MAKE) distclean
+	dh_clean
+
+install: DH_OPTIONS=-a
+install: build
+	dh_testdir
+	dh_testroot
+	dh_clean -k
+	dh_installdirs
+	INSTALL_PROGRAM="$(INSTALL_PROGRAM)" $(MAKE) install prefix=`pwd`/debian/tmp/usr
+
+	dh_movefiles
+
+	# Make /usr/share/doc/libsmpeg-dev a symlink to libsmpeg0's docs
+	ln -s libsmpeg0 debian/libsmpeg-dev/usr/share/doc/libsmpeg-dev
+
+# Build architecture-independent files here.
+binary-indep: build install
+	# We have nothing to do here
+
+# Build architecture-dependent files here.
+binary-arch: DH_OPTIONS=-a
+binary-arch: build install
+	dh_testdir 
+	dh_testroot 
+	dh_installdocs README
+	dh_installmenu
+	dh_installman
+	dh_installmime
+	dh_installchangelogs -plibsmpeg0 -psmpeg-plaympeg -psmpeg-gtv CHANGES
+	dh_strip 
+	dh_compress 
+	dh_fixperms
+#	dh_makeshlibs -V
+	dh_installdeb
+	dh_shlibdeps -ldebian/libsmpeg0/usr/lib
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+binary: binary-indep binary-arch
+.PHONY: build clean binary-indep binary-arch binary install
