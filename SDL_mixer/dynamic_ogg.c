@@ -108,7 +108,10 @@ int Mix_InitOgg()
 	if ( vorbis.loaded == 0 ) {
 		vorbis.ov_clear = ov_clear;
 		vorbis.ov_info = ov_info;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wincompatible-pointer-types"
 		vorbis.ov_open_callbacks = ov_open_callbacks;
+#pragma clang diagnostic pop
 		vorbis.ov_pcm_total = ov_pcm_total;
 		vorbis.ov_read = ov_read;
 		vorbis.ov_time_seek = ov_time_seek;

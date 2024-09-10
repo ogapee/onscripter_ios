@@ -30,7 +30,10 @@ SDL_PROC(void, glLinkProgram, (GLuint))
 SDL_PROC(void, glPixelStorei, (GLenum, GLint))
 SDL_PROC(void, glReadPixels, (GLint, GLint, GLsizei, GLsizei, GLenum, GLenum, GLvoid*))
 SDL_PROC(void, glShaderBinary, (GLsizei, const GLuint *, GLenum, const void *, GLsizei))
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wincompatible-pointer-types"
 SDL_PROC(void, glShaderSource, (GLuint, GLsizei, const char **, const GLint *))
+#pragma clang diagnostic pop
 SDL_PROC(void, glTexImage2D, (GLenum, GLint, GLint, GLsizei, GLsizei, GLint, GLenum, GLenum, const void *))
 SDL_PROC(void, glTexParameteri, (GLenum, GLenum, GLint))
 SDL_PROC(void, glTexSubImage2D, (GLenum, GLint, GLint, GLint, GLsizei, GLsizei, GLenum, GLenum, const GLvoid *))
